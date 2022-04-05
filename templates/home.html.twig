@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th>Number</th>
+            <th>Date</th>
+            <th>Country</th>
+            <th>League</th>
+            <th>Home Team ID</th>
+            <th>Home Team</th>
+            <th>Away Team ID</th>
+            <th>Away Team</th>
+            <th>1</th>
+            <th>X</th>
+            <th>2</th>
+            <th>Over</th>
+            <th>Under</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for fixture in fixtures %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ fixture['match_start'] }}</td>
+                <td>{{ fixture['country_name'] }}</td>
+                <td>{{ fixture['league_name'] }}</td>
+                <td>{{ fixture['home_team_id'] }}</td>
+                <td>{{ fixture['home_team_name'] }}</td>
+                <td>{{ fixture['away_team_id'] }}</td>
+                <td>{{ fixture['away_team_name'] }}</td>
+                <td>{{ fixture['home_odds'] }}</td>
+                <td>{{ fixture['draw_odds'] }}</td>
+                <td>{{ fixture['away_odds'] }}</td>
+                <td>{{ fixture['goals_over'] }}</td>
+                <td>{{ fixture['goals_under'] }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

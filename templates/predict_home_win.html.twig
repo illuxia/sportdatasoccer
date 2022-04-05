@@ -1,0 +1,171 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th>Number</th>
+            <th>Match ID</th>
+            <th>Match start</th>
+            {#            <th>Round</th>#}
+            <th>Country</th>
+            <th>League</th>
+            <th>Home Team</th>
+            <th>Away Team</th>
+            <th>1</th>
+            <th>X</th>
+            <th>2</th>
+            <th>Handicap</th>
+            <th>Over</th>
+            <th>Under</th>
+            <th colspan="2">Score</th>
+            <th>Prediction</th>
+            <th>Prediction</th>
+            <th>Prediction</th>
+            <th>Prediction</th>
+            <th>Prediction</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        {% set homeWinV1Count = 0 %}
+        {% set homeWinV2Count = 0 %}
+        {% set homeWinV3Count = 0 %}
+        {% set homeWinV4Count = 0 %}
+        {% set homeWinV5Count = 0 %}
+
+        {% set homeWinV1Succes = 0 %}
+        {% set homeWinV2Succes = 0 %}
+        {% set homeWinV3Succes = 0 %}
+        {% set homeWinV4Succes = 0 %}
+        {% set homeWinV5Succes = 0 %}
+
+        {% for prediction in predictions %}
+
+            {% if prediction['prediction_home_win_V1'] is not empty %}
+                {% set homeWinV1Count = homeWinV1Count + 1 %}
+            {% endif %}
+
+            {% if prediction['prediction_home_win_V2'] is not empty %}
+                {% set homeWinV2Count = homeWinV2Count + 1 %}
+            {% endif %}
+
+            {% if prediction['prediction_home_win_V3'] is not empty %}
+                {% set homeWinV3Count = homeWinV3Count + 1 %}
+            {% endif %}
+
+            {% if prediction['prediction_home_win_V4'] is not empty %}
+                {% set homeWinV4Count = homeWinV4Count + 1 %}
+            {% endif %}
+
+            {% if prediction['prediction_home_win_V5'] is not empty %}
+                {% set homeWinV5Count = homeWinV5Count + 1 %}
+            {% endif %}
+
+
+
+            {% if prediction['prediction_home_win_V1'] is not empty and (prediction['home_score'] > prediction['away_score']) %}
+                {% set homeWinV1Succes = homeWinV1Succes + 1 %}
+            {% endif %}
+
+            {% if prediction['prediction_home_win_V2'] is not empty and (prediction['home_score'] > prediction['away_score']) %}
+                {% set homeWinV2Succes = homeWinV2Succes + 1 %}
+            {% endif %}
+
+            {% if prediction['prediction_home_win_V3'] is not empty and (prediction['home_score'] > prediction['away_score']) %}
+                {% set homeWinV3Succes = homeWinV3Succes + 1 %}
+            {% endif %}
+
+            {% if prediction['prediction_home_win_V4'] is not empty and (prediction['home_score'] > prediction['away_score']) %}
+                {% set homeWinV4Succes = homeWinV4Succes + 1 %}
+            {% endif %}
+
+            {% if prediction['prediction_home_win_V5'] is not empty and (prediction['home_score'] > prediction['away_score']) %}
+                {% set homeWinV5Succes = homeWinV5Succes + 1 %}
+            {% endif %}
+
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ prediction['match_id'] }}</td>
+                <td>{{ prediction['match_start'] }}</td>
+                {#                <td>{{ prediction['round'] }}</td>#}
+                <td>{{ prediction['country_name'] }}</td>
+                <td>{{ prediction['league_name'] }}</td>
+                <td>{{ prediction['home_team_name'] }}</td>
+                <td>{{ prediction['away_team_name'] }}</td>
+                <td>{{ prediction['home_odds'] }}</td>
+                <td>{{ prediction['draw_odds'] }}</td>
+                <td>{{ prediction['away_odds'] }}</td>
+                <td>{{ prediction['handicap'] }}</td>
+                <td>{{ prediction['goals_over'] }}</td>
+                <td>{{ prediction['goals_under'] }}</td>
+                <td>{{ prediction['home_score'] }}</td>
+                <td>{{ prediction['away_score'] }}</td>
+                <td>{{ prediction['prediction_home_win_V1'] }}</td>
+                <td>{{ prediction['prediction_home_win_V2'] }}</td>
+                <td>{{ prediction['prediction_home_win_V3'] }}</td>
+                <td>{{ prediction['prediction_home_win_V4'] }}</td>
+                <td>{{ prediction['prediction_home_win_V5'] }}</td>
+            </tr>
+        {% endfor %}
+
+        {% set homeWinV1CountFinal = homeWinV1Count %}
+        {% set homeWinV2CountFinal = homeWinV2Count %}
+        {% set homeWinV3CountFinal = homeWinV3Count %}
+        {% set homeWinV4CountFinal = homeWinV4Count %}
+        {% set homeWinV5CountFinal = homeWinV5Count %}
+
+
+
+        {% if homeWinV1Count == 0 %}
+            {% set homeWinV1CountFinal = 1 %}
+        {% endif %}
+
+        {% if homeWinV2Count == 0 %}
+            {% set homeWinV2CountFinal = 1 %}
+        {% endif %}
+
+        {% if homeWinV3Count == 0 %}
+            {% set homeWinV3CountFinal = 1 %}
+        {% endif %}
+
+        {% if homeWinV4Count == 0 %}
+            {% set homeWinV4CountFinal = 1 %}
+        {% endif %}
+
+        {% if homeWinV5Count == 0 %}
+            {% set homeWinV5CountFinal = 1 %}
+        {% endif %}
+
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{ homeWinV1Succes }}  / {{ homeWinV1Count }} ({{ (homeWinV1Succes / homeWinV1CountFinal)|round(2) * 100  }} %)</td>
+            <td>{{ homeWinV2Succes }}  / {{ homeWinV2Count }} ({{ (homeWinV2Succes / homeWinV2CountFinal)|round(2) * 100  }} %)</td>
+            <td>{{ homeWinV3Succes }}  / {{ homeWinV3Count }} ({{ (homeWinV3Succes / homeWinV3CountFinal)|round(2) * 100  }} %)</td>
+            <td>{{ homeWinV4Succes }}  / {{ homeWinV4Count }} ({{ (homeWinV4Succes / homeWinV4CountFinal)|round(2) * 100  }} %)</td>
+            <td>{{ homeWinV5Succes }}  / {{ homeWinV5Count }} ({{ (homeWinV5Succes / homeWinV5CountFinal)|round(2) * 100  }} %)</td>
+        </tr>
+
+        </tbody>
+
+
+
+    </table>
+
+{% endblock %}
