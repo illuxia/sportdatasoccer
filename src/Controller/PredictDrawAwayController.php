@@ -35,8 +35,8 @@ class PredictDrawAwayController extends AbstractController
                                                             -- AND l.country_id NOT IN (114, 115, 55)
                                                             AND o.odd_type = "1X2, Full Time Result"
                                                             AND o.bookmaker_id = 2
-                                                            -- AND DATE(fx.match_start) < "2021-11-01"
-                                                            AND DATE(fx.match_start) >= "2021-11-01" 
+                                                            AND DATE(fx.match_start) < "2021-11-01"
+                                                            -- AND DATE(fx.match_start) >= "2021-11-01" 
                                                             GROUP BY fx.match_id, fx.match_start, l.league_id, l.name, c.country_id, c.name, fx.home_team_id, ht.name, ht.logo, fx.away_team_id, awt.name, awt.name, awt.logo, fx.ft_score
                                                             ORDER BY DATE(fx.match_start), c.name, l.name) t1
                                                             LEFT JOIN
@@ -170,7 +170,7 @@ class PredictDrawAwayController extends AbstractController
             $prediction = new PredictDrawAway($homeTeam, $awayTeam);
 
             if (
-                $prediction->predictDrawAwayV1() != '' && ($fixture['home_odds'] >= 1.65 && $fixture['home_odds'] <= 1.9 && ($fixture['handicap'] != "3" && $fixture['handicap'] != "3.0" && $fixture['handicap'] != "2.5,3.0" && $fixture['handicap'] != "2.75" && $fixture['handicap'] != "3.0,3.5" && $fixture['handicap'] != "3.25" && $fixture['handicap'] != "3.5" ))
+                $prediction->predictDrawAwayV1() != '' && ($fixture['home_odds'] >= 1.55 && $fixture['home_odds'] <= 1.9 && ($fixture['handicap'] != "3" && $fixture['handicap'] != "3.0" && $fixture['handicap'] != "2.5,3.0" && $fixture['handicap'] != "2.75" && $fixture['handicap'] != "3.0,3.5" && $fixture['handicap'] != "3.25" && $fixture['handicap'] != "3.5" ))
                 || $prediction->predictDrawAwayV2() != '' && ($fixture['home_odds'] >= 1.7 && $fixture['home_odds'] <= 1.9 && ($fixture['handicap'] != "3" && $fixture['handicap'] != "3.0" && $fixture['handicap'] != "2.5,3.0" && $fixture['handicap'] != "2.75" && $fixture['handicap'] != "3.0,3.5" && $fixture['handicap'] != "3.25" && $fixture['handicap'] != "3.5" ))
                 || $prediction->predictDrawAwayV3() != '' && ($fixture['home_odds'] >= 1.6 && $fixture['home_odds'] <= 1.9 && ($fixture['handicap'] != "3" && $fixture['handicap'] != "3.0" && $fixture['handicap'] != "2.5,3.0" && $fixture['handicap'] != "2.75" && $fixture['handicap'] != "3.0,3.5" && $fixture['handicap'] != "3.25" && $fixture['handicap'] != "3.5" ))
                 || $prediction->predictDrawAwayV4() != '' && ($fixture['home_odds'] >= 1.6 && $fixture['home_odds'] <= 1.95 && ($fixture['handicap'] != "3" && $fixture['handicap'] != "3.0" && $fixture['handicap'] != "2.5,3.0" && $fixture['handicap'] != "2.75" && $fixture['handicap'] != "3.0,3.5" && $fixture['handicap'] != "3.25" && $fixture['handicap'] != "3.5" ))
@@ -181,7 +181,7 @@ class PredictDrawAwayController extends AbstractController
 
                 $finalScore = (explode("-",$fixture['ft_score']));
 
-                $predictDrawAwayV1 = ($prediction->predictDrawAwayV1() != '' && ($fixture['home_odds'] >= 1.65 && $fixture['home_odds'] <= 1.9) && ($fixture['handicap'] != "3" && $fixture['handicap'] != "3.0" && $fixture['handicap'] != "2.5,3.0" && $fixture['handicap'] != "2.75" && $fixture['handicap'] != "3.0,3.5" && $fixture['handicap'] != "3.25" && $fixture['handicap'] != "3.5" ) ) ? $prediction->predictDrawAwayV1() : '';
+                $predictDrawAwayV1 = ($prediction->predictDrawAwayV1() != '' && ($fixture['home_odds'] >= 1.55 && $fixture['home_odds'] <= 1.9) && ($fixture['handicap'] != "3" && $fixture['handicap'] != "3.0" && $fixture['handicap'] != "2.5,3.0" && $fixture['handicap'] != "2.75" && $fixture['handicap'] != "3.0,3.5" && $fixture['handicap'] != "3.25" && $fixture['handicap'] != "3.5" ) ) ? $prediction->predictDrawAwayV1() : '';
                 $predictDrawAwayV2 = ($prediction->predictDrawAwayV2() != '' && ($fixture['home_odds'] >= 1.7 && $fixture['home_odds'] <= 1.9) && ($fixture['handicap'] != "3" && $fixture['handicap'] != "3.0" && $fixture['handicap'] != "2.5,3.0" && $fixture['handicap'] != "2.75" && $fixture['handicap'] != "3.0,3.5" && $fixture['handicap'] != "3.25" && $fixture['handicap'] != "3.5" )) ? $prediction->predictDrawAwayV2() : '';
                 $predictDrawAwayV3 = ($prediction->predictDrawAwayV3() != '' && ($fixture['home_odds'] >= 1.6 && $fixture['home_odds'] <= 1.9) && ($fixture['handicap'] != "3" && $fixture['handicap'] != "3.0" && $fixture['handicap'] != "2.5,3.0" && $fixture['handicap'] != "2.75" && $fixture['handicap'] != "3.0,3.5" && $fixture['handicap'] != "3.25" && $fixture['handicap'] != "3.5" )) ? $prediction->predictDrawAwayV3() : '';
                 $predictDrawAwayV4 = ($prediction->predictDrawAwayV4() != '' && ($fixture['home_odds'] >= 1.6 && $fixture['home_odds'] <= 1.95) && ($fixture['handicap'] != "3" && $fixture['handicap'] != "3.0" && $fixture['handicap'] != "2.5,3.0" && $fixture['handicap'] != "2.75" && $fixture['handicap'] != "3.0,3.5" && $fixture['handicap'] != "3.25" && $fixture['handicap'] != "3.5" )) ? $prediction->predictDrawAwayV4() : '';
