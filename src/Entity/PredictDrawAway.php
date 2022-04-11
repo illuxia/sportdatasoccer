@@ -256,7 +256,7 @@ class PredictDrawAway
         if (
             // option 1
             /*
-             * coefficient 1.55 - 1.9
+             * coefficient 1.55 - 1.8
              * goals handicap < 2.75
              */
             ($this->awayTeam->getGoalsScored() + $this->homeTeam->getGoalsAgainst() > 10) // 10
@@ -276,11 +276,12 @@ class PredictDrawAway
         if (
             // option 1
             /*
-             * coefficient 1.7 - 1.9
+             * coefficient 1.7 (1.55) - 1.8
              * goals handicap < 2.75
              */
-            (($this->homeTeam->getGoalsAgainst() > 5 ) // 5
+            (($this->homeTeam->getGoalsAgainst() > 6 ) // 6
             && ($this->homeTeam->getGoalsScored() + $this->awayTeam->getGoalsAgainst() < 15)) // 15
+
 
         )
 

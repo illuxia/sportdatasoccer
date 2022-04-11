@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th>Number</th>
+            <th>Match ID</th>
+            <th>Match start</th>
+            {#            <th>Round</th>#}
+            <th>Country</th>
+            <th>League</th>
+            <th>Home Team</th>
+            <th>Away Team</th>
+            <th>1</th>
+            <th>X</th>
+            <th>2</th>
+            <th>Handicap</th>
+            <th>Over</th>
+            <th>Under</th>
+            <th colspan="2">Score</th>
+            <th>Prediction</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        {% set drawAwayV1Count = 0 %}
+
+        {% set drawAwayV1Succes = 0 %}
+
+        {% for prediction in predictions %}
+
+
+            {% if prediction['prediction_draw_away_V1'] is not empty %}
+                {% set drawAwayV1Count = drawAwayV1Count + 1 %}
+            {% endif %}
+
+
+            {% if prediction['prediction_draw_away_V1'] is not empty and (prediction['home_score'] <= prediction['away_score']) %}
+                {% set drawAwayV1Succes = drawAwayV1Succes + 1 %}
+            {% endif %}
+
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ prediction['match_id'] }}</td>
+                <td>{{ prediction['match_start'] }}</td>
+                {#                <td>{{ prediction['round'] }}</td>#}
+                <td>{{ prediction['country_name'] }}</td>
+                <td>{{ prediction['league_name'] }}</td>
+                <td>{{ prediction['home_team_name'] }}</td>
+                <td>{{ prediction['away_team_name'] }}</td>
+                <td>{{ prediction['home_odds'] }}</td>
+                <td>{{ prediction['draw_odds'] }}</td>
+                <td>{{ prediction['away_odds'] }}</td>
+                <td>{{ prediction['handicap'] }}</td>
+                <td>{{ prediction['goals_over'] }}</td>
+                <td>{{ prediction['goals_under'] }}</td>
+                <td>{{ prediction['home_score'] }}</td>
+                <td>{{ prediction['away_score'] }}</td>
+                <td>{{ prediction['prediction_draw_away_V1'] }}</td>
+            </tr>
+        {% endfor %}
+
+        {% set drawAwayV1CountFinal = drawAwayV1Count %}
+
+
+        {% if drawAwayV1Count == 0 %}
+            {% set drawAwayV1CountFinal = 1 %}
+        {% endif %}
+
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{ drawAwayV1Succes }}  / {{ drawAwayV1Count }} ({{ (drawAwayV1Succes / drawAwayV1CountFinal)|round(2) * 100  }} %)</td>
+        </tr>
+
+        </tbody>
+
+
+
+    </table>
+
+{% endblock %}

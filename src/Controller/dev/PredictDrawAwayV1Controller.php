@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\dev;
 
 use App\Entity\PredictDrawAway;
 use App\Entity\Team;
@@ -11,10 +11,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 
-class PredictDrawAwayController extends AbstractController
+class PredictDrawAwayV1Controller extends AbstractController
 {
     /**
-     * @Route("/draw-away", name="home.draw_away")
+     * @Route("/draw-away-v1", name="home.draw_away_v1")
      */
     public function predictions(Connection $connection)
     {
@@ -170,22 +170,14 @@ class PredictDrawAwayController extends AbstractController
             $prediction = new PredictDrawAway($homeTeam, $awayTeam);
 
             if (
-                $prediction->predictDrawAwayV1() != '' && ($fixture['home_odds'] >= 1.55 && $fixture['home_odds'] <= 1.9 && ($fixture['handicap'] != "3" && $fixture['handicap'] != "3.0" && $fixture['handicap'] != "2.5,3.0" && $fixture['handicap'] != "2.75" && $fixture['handicap'] != "3.0,3.5" && $fixture['handicap'] != "3.25" && $fixture['handicap'] != "3.5" ))
-                || $prediction->predictDrawAwayV2() != '' && ($fixture['home_odds'] >= 1.7 && $fixture['home_odds'] <= 1.9 && ($fixture['handicap'] != "3" && $fixture['handicap'] != "3.0" && $fixture['handicap'] != "2.5,3.0" && $fixture['handicap'] != "2.75" && $fixture['handicap'] != "3.0,3.5" && $fixture['handicap'] != "3.25" && $fixture['handicap'] != "3.5" ))
-                || $prediction->predictDrawAwayV3() != '' && ($fixture['home_odds'] >= 1.6 && $fixture['home_odds'] <= 1.9 && ($fixture['handicap'] != "3" && $fixture['handicap'] != "3.0" && $fixture['handicap'] != "2.5,3.0" && $fixture['handicap'] != "2.75" && $fixture['handicap'] != "3.0,3.5" && $fixture['handicap'] != "3.25" && $fixture['handicap'] != "3.5" ))
-                || $prediction->predictDrawAwayV4() != '' && ($fixture['home_odds'] >= 1.6 && $fixture['home_odds'] <= 1.95 && ($fixture['handicap'] != "3" && $fixture['handicap'] != "3.0" && $fixture['handicap'] != "2.5,3.0" && $fixture['handicap'] != "2.75" && $fixture['handicap'] != "3.0,3.5" && $fixture['handicap'] != "3.25" && $fixture['handicap'] != "3.5" ))
-                || $prediction->predictDrawAwayV5() != '' && ($fixture['home_odds'] >= 1.6 && $fixture['home_odds'] <= 1.95 && ($fixture['handicap'] == "2.5" || $fixture['handicap'] == "2.5,3.0" || $fixture['handicap'] == "2.75" ))
+                $prediction->predictDrawAwayV1() != '' && ($fixture['home_odds'] >= 1.55 && $fixture['home_odds'] <= 1.8 && ($fixture['handicap'] != "3" && $fixture['handicap'] != "3.0" && $fixture['handicap'] != "2.5,3.0" && $fixture['handicap'] != "2.75" && $fixture['handicap'] != "3.0,3.5" && $fixture['handicap'] != "3.25" && $fixture['handicap'] != "3.5" ))
 
             )
             {
 
                 $finalScore = (explode("-",$fixture['ft_score']));
 
-                $predictDrawAwayV1 = ($prediction->predictDrawAwayV1() != '' && ($fixture['home_odds'] >= 1.55 && $fixture['home_odds'] <= 1.9) && ($fixture['handicap'] != "3" && $fixture['handicap'] != "3.0" && $fixture['handicap'] != "2.5,3.0" && $fixture['handicap'] != "2.75" && $fixture['handicap'] != "3.0,3.5" && $fixture['handicap'] != "3.25" && $fixture['handicap'] != "3.5" ) ) ? $prediction->predictDrawAwayV1() : '';
-                $predictDrawAwayV2 = ($prediction->predictDrawAwayV2() != '' && ($fixture['home_odds'] >= 1.7 && $fixture['home_odds'] <= 1.9) && ($fixture['handicap'] != "3" && $fixture['handicap'] != "3.0" && $fixture['handicap'] != "2.5,3.0" && $fixture['handicap'] != "2.75" && $fixture['handicap'] != "3.0,3.5" && $fixture['handicap'] != "3.25" && $fixture['handicap'] != "3.5" )) ? $prediction->predictDrawAwayV2() : '';
-                $predictDrawAwayV3 = ($prediction->predictDrawAwayV3() != '' && ($fixture['home_odds'] >= 1.6 && $fixture['home_odds'] <= 1.9) && ($fixture['handicap'] != "3" && $fixture['handicap'] != "3.0" && $fixture['handicap'] != "2.5,3.0" && $fixture['handicap'] != "2.75" && $fixture['handicap'] != "3.0,3.5" && $fixture['handicap'] != "3.25" && $fixture['handicap'] != "3.5" )) ? $prediction->predictDrawAwayV3() : '';
-                $predictDrawAwayV4 = ($prediction->predictDrawAwayV4() != '' && ($fixture['home_odds'] >= 1.6 && $fixture['home_odds'] <= 1.95) && ($fixture['handicap'] != "3" && $fixture['handicap'] != "3.0" && $fixture['handicap'] != "2.5,3.0" && $fixture['handicap'] != "2.75" && $fixture['handicap'] != "3.0,3.5" && $fixture['handicap'] != "3.25" && $fixture['handicap'] != "3.5" )) ? $prediction->predictDrawAwayV4() : '';
-                $predictDrawAwayV5 = ($prediction->predictDrawAwayV5() != '' && ($fixture['home_odds'] >= 1.6 && $fixture['home_odds'] <= 1.95) && ($fixture['handicap'] == "2.5" || $fixture['handicap'] == "2.5,3.0" || $fixture['handicap'] == "2.75" )) ? $prediction->predictDrawAwayV5() : '';
+                $predictDrawAwayV1 = ($prediction->predictDrawAwayV1() != '' && ($fixture['home_odds'] >= 1.55 && $fixture['home_odds'] <= 1.8) && ($fixture['handicap'] != "3" && $fixture['handicap'] != "3.0" && $fixture['handicap'] != "2.5,3.0" && $fixture['handicap'] != "2.75" && $fixture['handicap'] != "3.0,3.5" && $fixture['handicap'] != "3.25" && $fixture['handicap'] != "3.5" ) ) ? $prediction->predictDrawAwayV1() : '';
 
                 array_push($predictions, [
                     'match_id' => $fixture['match_id'],
@@ -205,17 +197,13 @@ class PredictDrawAwayController extends AbstractController
                     'home_score' => $finalScore[0],
                     'away_score' => $finalScore[1],
                     'prediction_draw_away_V1' => $predictDrawAwayV1,
-                    'prediction_draw_away_V2' => $predictDrawAwayV2,
-                    'prediction_draw_away_V3' => $predictDrawAwayV3,
-                    'prediction_draw_away_V4' => $predictDrawAwayV4,
-                    'prediction_draw_away_V5' => $predictDrawAwayV5
                 ]);
             }
 
 
         }
 
-        return $this->render('predict_draw_away.html.twig', [
+        return $this->render('dev/predict_draw_away_v1_html.twig', [
             'predictions' => $predictions
         ]);
     }
