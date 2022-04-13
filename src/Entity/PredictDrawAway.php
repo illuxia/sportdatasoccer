@@ -296,13 +296,22 @@ class PredictDrawAway
     public function predictDrawAwayV3()
     {
         if (
+//            // option 1
+//            /*
+//             * coefficient 1.6 - 1.9
+//             * goals handicap < 2.75
+//             */
+//            ($this->homeTeam->getGoalsScored() + $this->awayTeam->getGoalsAgainst() < 15) // 15
+//            && ($this->awayTeam->getGoalsScored() + $this->homeTeam->getGoalsAgainst() > 12) // 12
+
             // option 1
             /*
-             * coefficient 1.6 - 1.9
+             * coefficient 1.55 (1.7) - 1.8
              * goals handicap < 2.75
              */
-            ($this->homeTeam->getGoalsScored() + $this->awayTeam->getGoalsAgainst() < 15)
-            && ($this->awayTeam->getGoalsScored() + $this->homeTeam->getGoalsAgainst() > 12)
+            ($this->homeTeam->getGoalsScored() + $this->awayTeam->getGoalsAgainst() < 14) // 14
+            && ($this->awayTeam->getGoalsScored() + $this->homeTeam->getGoalsAgainst() > 9) // 9
+            && ($this->awayTeam->getLastGoalsAgainst() <= $this->homeTeam->getLastGoalsAgainst() || $this->awayTeam->getGoalsAgainst() <= $this->homeTeam->getGoalsAgainst())
         )
 
         {
