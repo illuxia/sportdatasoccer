@@ -35,8 +35,8 @@ class PredictGoalsOverV4Controller extends AbstractController
                                                             -- AND l.country_id NOT IN (114, 115, 55)
                                                             AND o.odd_type = "1X2, Full Time Result"
                                                             AND o.bookmaker_id = 2
-                                                            AND DATE(fx.match_start) < "2021-11-01"
-                                                            -- AND DATE(fx.match_start) >= "2021-11-01" 
+                                                            -- AND DATE(fx.match_start) < "2021-11-01"
+                                                            AND DATE(fx.match_start) >= "2021-11-01" 
                                                             GROUP BY fx.match_id, fx.match_start, l.league_id, l.name, c.country_id, c.name, fx.home_team_id, ht.name, ht.logo, fx.away_team_id, awt.name, awt.name, awt.logo, fx.ft_score
                                                             ORDER BY DATE(fx.match_start), c.name, l.name) t1
                                                             LEFT JOIN
@@ -170,13 +170,13 @@ class PredictGoalsOverV4Controller extends AbstractController
             $prediction = new PredictGoalsOver($homeTeam, $awayTeam);
 
             if (
-                $prediction->predictOverV4() != '' && ($fixture['home_odds'] >= 1.85 && $fixture['home_odds'] <= 2 && ($fixture['handicap'] != "3" && $fixture['handicap'] != "3.0" && $fixture['handicap'] != "2.5,3.0" && $fixture['handicap'] != "2.75" && $fixture['handicap'] != "3.0,3.5" && $fixture['handicap'] != "3.25" && $fixture['handicap'] != "3.5" ))
+                $prediction->predictOverV4() != '' && ($fixture['home_odds'] >= 1.75 && $fixture['home_odds'] <= 1.95 && ($fixture['handicap'] == "2" || $fixture['handicap'] == "2.0" || $fixture['handicap'] == "2.0,2.5" || $fixture['handicap'] == "2.25" || $fixture['handicap'] == "2.5" ))
             )
             {
 
                 $finalScore = (explode("-",$fixture['ft_score']));
 
-                $predictOverV4 = ($prediction->predictOverV4() != '' && ($fixture['home_odds'] >= 1.85 && $fixture['home_odds'] <= 2) && ($fixture['handicap'] != "3" && $fixture['handicap'] != "3.0" && $fixture['handicap'] != "2.5,3.0" && $fixture['handicap'] != "2.75" && $fixture['handicap'] != "3.0,3.5" && $fixture['handicap'] != "3.25" && $fixture['handicap'] != "3.5" )) ? $prediction->predictOverV4() : '';
+                $predictOverV4 = ($prediction->predictOverV4() != '' && ($fixture['home_odds'] >= 1.75 && $fixture['home_odds'] <= 1.95) && ($fixture['handicap'] == "2" || $fixture['handicap'] == "2.0" || $fixture['handicap'] == "2.0,2.5" || $fixture['handicap'] == "2.25" || $fixture['handicap'] == "2.5" )) ? $prediction->predictOverV4() : '';
 
                 array_push($predictions, [
                     'match_id' => $fixture['match_id'],

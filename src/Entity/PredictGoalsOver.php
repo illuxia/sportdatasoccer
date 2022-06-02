@@ -99,11 +99,13 @@ class PredictGoalsOver
         if (
             // option 1
             /*
-             * coefficient 1.85 - 2
-             * goals handicap < 2.75
+             * coefficient 1.75 - 1.95
+             * goals handicap - AH 2.5, AH 2.25, AH 2
              */
-        (($this->homeTeam->getGoalsAgainst() > 9 )) // 6
-//            && ($this->homeTeam->getGoalsScored() + $this->awayTeam->getGoalsAgainst() < 16)) // 16
+
+            $this->homeTeam->getGoalsScored() > 9 // 9
+            &&
+            $this->homeTeam->getLastGoalsScored() > 3 // 3
 
         )
 
