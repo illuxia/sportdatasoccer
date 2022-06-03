@@ -171,13 +171,13 @@ class PredictHomeWinV1Controller extends AbstractController
             $prediction = new PredictHomeWin($homeTeam, $awayTeam);
 
             if (
-                $prediction->predictHomeWinV1() != '' && ($fixture['home_odds'] >= 1.7 && $fixture['home_odds'] <= 2.1 ) && ($fixture['handicap'] != "2.5,3.0" && $fixture['handicap'] != "2.75" && $fixture['handicap'] != "3" && $fixture['handicap'] != "3.0" && $fixture['handicap'] != "3.0,3.5" && $fixture['handicap'] != "3.25" && $fixture['handicap'] != "3.5" )
+                $prediction->predictHomeWinV1() != '' && ($fixture['home_odds'] >= 1.71 && $fixture['home_odds'] <= 2.1 ) && ($fixture['handicap'] == "2" || $fixture['handicap'] == "2.0" || $fixture['handicap'] == "2.0,2.5" || $fixture['handicap'] == "2.25" || $fixture['handicap'] == "2.5" )
             )
             {
 
                 $finalScore = (explode("-",$fixture['ft_score']));
 
-                $predictHomeWinV1 = ($prediction->predictHomeWinV1() != '' && ($fixture['home_odds'] >= 1.7 && $fixture['home_odds'] <= 2.1 ) && ($fixture['handicap'] != "2.5,3.0" && $fixture['handicap'] != "2.75" && $fixture['handicap'] != "3" && $fixture['handicap'] != "3.0" && $fixture['handicap'] != "3.0,3.5" && $fixture['handicap'] != "3.25" && $fixture['handicap'] != "3.5" ) ) ? $prediction->predictHomeWinV1() : '';
+                $predictHomeWinV1 = ($prediction->predictHomeWinV1() != '' && ($fixture['home_odds'] >= 1.71 && $fixture['home_odds'] <= 2.1 ) && ($fixture['handicap'] == "2" || $fixture['handicap'] == "2.0" || $fixture['handicap'] == "2.0,2.5" || $fixture['handicap'] == "2.25" || $fixture['handicap'] == "2.5" ) ) ? $prediction->predictHomeWinV1() : '';
 
                 array_push($predictions, [
                     'match_id' => $fixture['match_id'],

@@ -19,10 +19,12 @@ class PredictHomeWin
         if (
             // option 1
             // coefficient (1.7 - 2.1)
-            // AH < 2.75
-            $this->awayTeam->getGoalsScored() >= 7 // 7 (9)
-            && $this->homeTeam->getGoalsAgainst() <= 5 //5
-
+            // AH - 2, 2.25, 2.5
+            $this->awayTeam->getGoalsScored() >= 8 // 7 (8)
+            &&
+            $this->homeTeam->getGoalsAgainst() <= 5 // 5
+            &&
+            $this->homeTeam->getGoalsScored() >= 5 // 5 (6)
 
         )
 
