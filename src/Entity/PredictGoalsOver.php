@@ -17,10 +17,13 @@ class PredictGoalsOver
     public function predictOverV1()
     {
         if (
-//            ($this->awayTeam->getGoalsAgainst() <= 5
-//            && $this->homeTeam->getGoalsScored() <= 5
-//            && $this->homeTeam->getGoalsAgainst() <= 5)
-        ($this->homeTeam->getGoalsScored() + $this->awayTeam->getGoalsAgainst() > 19)
+            /*
+             * coefficient 1.2 - 2.15
+             * handicap - AH 2.5
+             */
+            ($this->homeTeam->getGoalsScored() + $this->awayTeam->getGoalsAgainst() > 17) // 17
+            &&
+            ($this->awayTeam->getGoalsScored() + $this->homeTeam->getGoalsAgainst() < 11) // 11
 
         )
         {
@@ -36,22 +39,22 @@ class PredictGoalsOver
             // option 1
             /*
              * coefficient 1.2 - 1.6
-             * handicap - AH 2.5, AH 2.25
+             * handicap - AH 2.5, AH 2.25, AH 2.0
              */
-            ($this->awayTeam->getGoalsScored() + $this->homeTeam->getGoalsAgainst() <= 13)
+            ($this->awayTeam->getGoalsScored() + $this->homeTeam->getGoalsAgainst() <= 13) // 13
             &&
-            ($this->awayTeam->getGoalsScored() + $this->homeTeam->getGoalsAgainst() >= 7)
+            ($this->awayTeam->getGoalsScored() + $this->homeTeam->getGoalsAgainst() >= 7) // 7
 
             &&
-            ($this->homeTeam->getGoalsScored() + $this->awayTeam->getGoalsAgainst() <= 16)
+            ($this->homeTeam->getGoalsScored() + $this->awayTeam->getGoalsAgainst() <= 16) // 16
 
             &&
-            ($this->homeTeam->getGoalsScored() + $this->awayTeam->getGoalsAgainst() >= 10)
+            ($this->homeTeam->getGoalsScored() + $this->awayTeam->getGoalsAgainst() >= 10) // 10
 
-            // option 2
-//            ($this->awayTeam->getGoalsScored() + $this->homeTeam->getGoalsAgainst() <= 15)
-//            &&
-//            ($this->awayTeam->getGoalsScored() + $this->homeTeam->getGoalsAgainst() >= 9) // 6 is optimal
+            &&
+            ($this->homeTeam->getGoalsAgainst() > $this->awayTeam->getGoalsAgainst()
+            ||
+            $this->homeTeam->getGoalsScored() > $this->awayTeam->getGoalsScored())
 
 
         )
@@ -67,24 +70,20 @@ class PredictGoalsOver
         if (
             // option 1
             /*
-             * coefficient 1.2 - 1.55
-             * handicap - AH 2.5, AH 2.25, AH 2
+             * coefficient 1.2 - 1.67 (1.2 - 1.55)
+             * handicap - AH 2.5, AH 2.25, AH 2.0
              */
-//            ($this->awayTeam->getGoalsScored() + $this->homeTeam->getGoalsAgainst() <= 19)
-//            &&
-//            ($this->awayTeam->getGoalsScored() + $this->homeTeam->getGoalsAgainst() >= 5)
-//
-//            &&
-//            ($this->homeTeam->getGoalsScored() + $this->awayTeam->getGoalsAgainst() <= 15)
-//
-//            &&
-//            ($this->homeTeam->getGoalsScored() + $this->awayTeam->getGoalsAgainst() >= 11)
 
-            // option 2
-            ($this->awayTeam->getGoalsScored() + $this->homeTeam->getGoalsAgainst() <= 15)
+
+            $this->awayTeam->getLastGoalsScored() <= 1
+
             &&
-            ($this->awayTeam->getGoalsScored() + $this->homeTeam->getGoalsAgainst() >= 9) // 6 is optimal
 
+            ($this->homeTeam->getLastGoalsScored() > $this->awayTeam->getLastGoalsScored()
+            ||
+            $this->homeTeam->getLastGoalsScored() > $this->awayTeam->getLastGoalsAgainst()
+            ||
+            $this->homeTeam->getGoalsScored() > $this->awayTeam->getGoalsScored())
 
         )
         {
