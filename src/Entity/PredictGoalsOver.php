@@ -70,7 +70,7 @@ class PredictGoalsOver
         if (
             // option 1
             /*
-             * coefficient 1.2 - 1.67 (1.2 - 1.55)
+             * coefficient 1.2 - 1.7 (1.2 - 1.55)
              * handicap - AH 2.5, AH 2.25, AH 2.0
              */
 
