@@ -17,14 +17,24 @@ class PredictGoalsUnder
     public function predictUnderV1()
     {
         if (
-            // option 1
             /*
-             * handicap - AH 2.5, AH 2.75
-             * coefficient - home team odds 2.4 - 2.65
+             * handicap - AH 2.5
+             * coefficient - home team odds 2.2 - 2.65
              */
-            ($this->awayTeam->getGoalsScored() + $this->homeTeam->getGoalsAgainst() <= 19)
+
+            $this->awayTeam->getGoalsAgainst() >= 5 // 5
+
             &&
-            ($this->awayTeam->getGoalsScored() + $this->homeTeam->getGoalsAgainst() >= 5)
+
+            $this->homeTeam->getGoalsAgainst() >= 5 // 5
+
+            &&
+
+            ($this->homeTeam->getGoalsScored() > $this->awayTeam->getGoalsScored()
+            ||
+            ($this->homeTeam->getLastGoalsScored() + $this->awayTeam->getLastGoalsAgainst() + 2) < ($this->awayTeam->getLastGoalsScored() + $this->homeTeam->getLastGoalsAgainst()))
+
+
 
 
         )
@@ -38,20 +48,22 @@ class PredictGoalsUnder
     public function predictUnderV2()
     {
         if (
-            // option 1
             /*
-             * handicap - AH 2.5, AH 2.75
-             * coefficient - home team odds 2.4 - 2.65
+             * handicap - AH 2.5
+             * coefficient - home team odds 2.2 - 2.65
              */
-            ($this->awayTeam->getGoalsScored() + $this->homeTeam->getGoalsAgainst() <= 19)
+
+            $this->awayTeam->getLastGoalsScored() >= 2 // 2
             &&
-            ($this->awayTeam->getGoalsScored() + $this->homeTeam->getGoalsAgainst() >= 5)
+            $this->homeTeam->getLastGoalsScored() >= 2 // 2
 
             &&
-            ($this->homeTeam->getGoalsScored() + $this->awayTeam->getGoalsAgainst() <= 15)
 
-            &&
-            ($this->homeTeam->getGoalsScored() + $this->awayTeam->getGoalsAgainst() >= 11)
+            $this->homeTeam->getLastGoalsAgainst() >= $this->awayTeam->getLastGoalsAgainst()
+
+//            &&
+//
+//            $this->homeTeam->getGoalsScored() > $this->awayTeam->getGoalsScored() + 1
 
 
         )
