@@ -67,9 +67,19 @@ class PredictHomeWin
 
             // option 5
             // coefficient (1.7 - 1.9)
-            // 43/60 72%
-            $this->awayTeam->getGoalsScored() >= 8
-            && $this->homeTeam->getGoalsAgainst() <= $this->awayTeam->getGoalsAgainst() + 1
+            // goals handicap - AH2, AH2.25, AH2.5, AH2.75, AH3, AH3.25 AH3.5
+            // 41/57 72%
+
+            // TODO clone strategy as over 2.5
+            $this->awayTeam->getGoalsScored() >= 8 // 8
+
+            &&
+
+            $this->homeTeam->getGoalsAgainst() <= 9 // 9
+
+            &&
+
+            $this->homeTeam->getGoalsAgainst() <= $this->awayTeam->getGoalsAgainst() + 1 // 1
 
 
         )
