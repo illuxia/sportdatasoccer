@@ -36,7 +36,8 @@ class PredictDrawAwayController extends AbstractController
                                                             AND o.odd_type = "1X2, Full Time Result"
                                                             AND o.bookmaker_id = 2
                                                             -- AND DATE(fx.match_start) < "2021-11-01"
-                                                            AND DATE(fx.match_start) >= "2021-11-01" 
+                                                            -- AND DATE(fx.match_start) >= "2021-11-01" 
+                                                            AND DATE(fx.match_start) > "2021-12-31"
                                                             GROUP BY fx.match_id, fx.match_start, l.league_id, l.name, c.country_id, c.name, fx.home_team_id, ht.name, ht.logo, fx.away_team_id, awt.name, awt.name, awt.logo, fx.ft_score
                                                             ORDER BY DATE(fx.match_start), c.name, l.name) t1
                                                             LEFT JOIN
