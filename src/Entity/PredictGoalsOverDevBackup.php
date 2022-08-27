@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-class PredictGoalsOverBackup
+class PredictGoalsOverDevBackup
 {
     private $homeTeam;
     private $awayTeam;

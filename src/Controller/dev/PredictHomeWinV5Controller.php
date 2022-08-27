@@ -2,8 +2,8 @@
 
 namespace App\Controller\dev;
 
-use App\Entity\PredictDrawAway;
-use App\Entity\PredictHomeWin;
+use App\Entity\PredictDrawAwayDev;
+use App\Entity\PredictHomeWinDev;
 use App\Entity\Team;
 use Doctrine\DBAL\Connection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 class PredictHomeWinV5Controller extends AbstractController
 {
     /**
-     * @Route("/home-win-v5", name="home.home_win_v5")
+     * @Route("/dev/home-win-v5", name="home.home_win_v5")
      */
     public function predictions(Connection $connection)
     {
@@ -169,7 +169,7 @@ class PredictHomeWinV5Controller extends AbstractController
             /*
              * Start prediction
              */
-            $prediction = new PredictHomeWin($homeTeam, $awayTeam);
+            $prediction = new PredictHomeWinDev($homeTeam, $awayTeam);
 
             if (
                 $prediction->predictHomeWinV5() != '' && ($fixture['home_odds'] >= 1.6 && $fixture['home_odds'] <= 1.9 && ($fixture['handicap'] == "2.5,3.0" || $fixture['handicap'] == "2.75" || $fixture['handicap'] == "3.0" || $fixture['handicap'] == "3" || $fixture['handicap'] == "3.0,3.5" || $fixture['handicap'] == "3.25" || $fixture['handicap'] == "3.5" ) )

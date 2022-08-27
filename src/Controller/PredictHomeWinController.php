@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\PredictDrawAway;
-use App\Entity\PredictHomeWin;
+use App\Entity\PredictDrawAwayDev;
+use App\Entity\PredictHomeWinDev;
 use App\Entity\Team;
 use Doctrine\DBAL\Connection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -169,7 +169,7 @@ class PredictHomeWinController extends AbstractController
             /*
              * Start prediction
              */
-            $prediction = new PredictHomeWin($homeTeam, $awayTeam);
+            $prediction = new PredictHomeWinDev($homeTeam, $awayTeam);
 
             if (
                 $prediction->predictHomeWinV1() != '' && ($fixture['home_odds'] >= 1.55 && $fixture['home_odds'] <= 1.9 )

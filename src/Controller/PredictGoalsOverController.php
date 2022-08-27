@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\PredictGoalsOver;
+use App\Entity\PredictGoalsOverDev;
 use App\Entity\Team;
 use Doctrine\DBAL\Connection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -168,7 +168,7 @@ class PredictGoalsOverController extends AbstractController
             /*
              * Start prediction
              */
-            $prediction = new PredictGoalsOver($homeTeam, $awayTeam);
+            $prediction = new PredictGoalsOverDev($homeTeam, $awayTeam);
 
             if (
                 ($prediction->predictOverV1() != '' && ($fixture['handicap'] == "2.5" ))

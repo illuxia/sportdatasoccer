@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-class PredictDrawAwayBackup
+class PredictDrawAwayDevBackup
 {
     private $homeTeam;
     private $awayTeam;

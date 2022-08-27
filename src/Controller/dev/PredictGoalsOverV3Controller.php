@@ -2,7 +2,7 @@
 
 namespace App\Controller\dev;
 
-use App\Entity\PredictGoalsOver;
+use App\Entity\PredictGoalsOverDev;
 use App\Entity\Team;
 use Doctrine\DBAL\Connection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 class PredictGoalsOverV3Controller extends AbstractController
 {
     /**
-     * @Route("/goals-over-v3", name="home.goals-over_v3")
+     * @Route("/dev/goals-over-v3", name="home.goals-over_v3")
      */
     public function predictions(Connection $connection)
     {
@@ -168,7 +168,7 @@ class PredictGoalsOverV3Controller extends AbstractController
             /*
              * Start prediction
              */
-            $prediction = new PredictGoalsOver($homeTeam, $awayTeam);
+            $prediction = new PredictGoalsOverDev($homeTeam, $awayTeam);
 
             if (
                 $prediction->predictOverV3() != '' && ($fixture['home_odds'] >= 1.2 && $fixture['home_odds'] <= 1.7 ) && ($fixture['handicap'] == "2" || $fixture['handicap'] == "2.0" || $fixture['handicap'] == "2.0,2.5" || $fixture['handicap'] == "2.25" || $fixture['handicap'] == "2.5" )

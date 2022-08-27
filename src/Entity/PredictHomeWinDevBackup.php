@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-class PredictHomeWinBackup
+class PredictHomeWinDevBackup
 {
     private $homeTeam;
     private $awayTeam;

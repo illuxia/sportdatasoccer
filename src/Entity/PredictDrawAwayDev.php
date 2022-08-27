@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-class PredictDrawAway
+class PredictDrawAwayDev
 {
     private $homeTeam;
     private $awayTeam;

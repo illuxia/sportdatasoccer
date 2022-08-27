@@ -2,7 +2,7 @@
 
 namespace App\Controller\dev;
 
-use App\Entity\PredictDrawAway;
+use App\Entity\PredictDrawAwayDev;
 use App\Entity\Team;
 use Doctrine\DBAL\Connection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -168,7 +168,7 @@ class PredictDrawAwayV2Controller extends AbstractController
             /*
              * Start prediction
              */
-            $prediction = new PredictDrawAway($homeTeam, $awayTeam);
+            $prediction = new PredictDrawAwayDev($homeTeam, $awayTeam);
 
             if (
                 $prediction->predictDrawAwayV2() != '' && ($fixture['home_odds'] >= 1.7 && $fixture['home_odds'] <= 1.8 && ($fixture['handicap'] != "3" && $fixture['handicap'] != "3.0" && $fixture['handicap'] != "2.5,3.0" && $fixture['handicap'] != "2.75" && $fixture['handicap'] != "3.0,3.5" && $fixture['handicap'] != "3.25" && $fixture['handicap'] != "3.5" ))
